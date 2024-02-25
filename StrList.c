@@ -115,8 +115,15 @@ char* StrList_firstData(const StrList* list) {
 void StrList_print(const StrList* list) {
     Node* current = list->head;
     while (current != NULL) {
-        printf("%s ", current->data);
-        current = current->next;
+        if(current->next != NULL){
+            printf("%s ", current->data);
+            current = current->next;
+        }
+        else{   // This is just for removing the last space
+            printf("%s", current->data);
+            current = current->next;
+        }
+
     }
 }
 
