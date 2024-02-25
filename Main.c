@@ -6,7 +6,7 @@
 int main() {
     int option;
     int index;
-    char *input;   // Pointer to char to dynamically allocate memory
+    char input[300];    // Assuming a maximum word length of 200 characters
     StrList* list;
 
     while (1) {
@@ -20,17 +20,10 @@ int main() {
                 scanf(" %d", &num_words);
 
                 while (getchar() != '\n');  // waits for user to input enter
-                // Dynamically allocate memory for input buffer
-                input = (char *)malloc(sizeof(char) * 2000); // Assume a larger initial size
-                if (input == NULL) {
-                    printf("Memory allocation failed\n");
-                    exit(1);
-                }
-                
                 // Read the entire line of input to accommodate multiple words with spaces:
-                fgets(input, 2000, stdin);
+                fgets(input, sizeof(input), stdin);
 
-                // Newline is also included, so we will replace it with null terminator
+                // Newline is also included, so we will replace it with null terminater
                 int len = strlen(input);
                 if (input[len - 1] == '\n') {
                     input[len - 1] = '\0'; 
@@ -45,8 +38,6 @@ int main() {
                     // Get the next word:
                     token = strtok(NULL, " ");
                 }
-
-                free(input); // Free dynamically allocated memory
                 break;
 
             case 2:
